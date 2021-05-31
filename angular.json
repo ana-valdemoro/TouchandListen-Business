@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "touchandlistenBusiness"
+    }
+  },
+  "defaultProject": "touchandlistenBusiness",
+  "cli": {
+    "analytics": false
+  }
 }
