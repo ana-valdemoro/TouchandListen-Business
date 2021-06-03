@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: true,
+  firebase: {
+    apiKey: "AIzaSyALdAH3pD9VPQ20EXZB9OH4BdybdqIoGkM",
+    authDomain: "touchandlisten-tfg.firebaseapp.com",
+    databaseURL: "https://touchandlisten-tfg.firebaseio.com",
+    projectId: "touchandlisten-tfg",
+    storageBucket: "touchandlisten-tfg.appspot.com",
+    messagingSenderId: "266833109558",
+    appId: "1:266833109558:web:7232848d8acf23d9aa2e97"
+  }
 };
 
 /*
