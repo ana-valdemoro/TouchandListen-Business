@@ -9,7 +9,7 @@ export class ISong {
     genre?:string[];
     album?:string;
     photoURL?: string;
-    path?:string;
+    path:string;
     timesPlaying?: number;
     likes?: string[];
     likesCount?: number;
