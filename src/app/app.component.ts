@@ -25,33 +25,40 @@ export class AppComponent implements OnInit{
 
 
   start(){
-    // if(this.player){
-    //   this.player.stop();
-    // }
-
-    this.currentSong = this.nextSong;
-    console.log(this.currentSong);
-    this.player = new Howl({
-      src:[this.currentSong.path],
-      html5:true,
-      onload:() =>{
-        this.playlistService.activateCurrentSong(this.currentSong._id)
-      },
-      onplay:()=>{
-        console.log("Sonando");
-        // this.duration = this.formatTime(this.player.duration());
-
-        // this.updateProgress();
-      },
-      onend:()=>{
-        console.log("Termino");
-        this.playlistService.deleteCurrentSong(this.currentSong._id);
-        this.start();
-      }
-    });
-    this.player.play();
+    if(this.nextSong !== undefined){
+      this.currentSong = this.nextSong;
+      console.log(this.currentSong);
+      this.player = new Howl({
+        src:[this.currentSong.path],
+        html5:true,
+        onload:() =>{
+          this.playlistService.activateCurrentSong(this.currentSong._id, this.player.duration())
+        },
+        onplay:()=>{
+          console.log("Sonando");
+          this.updateProgress();
+        },
+        onend:()=>{
+          console.log("Termino");
+          this.playlistService.deleteCurrentSong(this.currentSong._id);
+          this.start();
+        }
+      });
+      this.player.play();
+    }
+  
   }
   stop(){
     this.player.pause();
   }
+  private updateProgress(){
+    let seek = this.player.seek(); //Obtenemos la posición actual
+    this.playlistService.updateCurrentSongTime(this.currentSong._id, seek)
+    if(this.player.playing()){
+      setTimeout(()=>{
+        this.updateProgress();
+      }, 800);
+    } 
+  }
+  
 }
