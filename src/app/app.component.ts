@@ -53,7 +53,7 @@ export class AppComponent implements OnInit{
   }
   private updateProgress(){
     let seek = this.player.seek(); //Obtenemos la posición actual
-    this.playlistService.updateCurrentSongTime(this.currentSong._id, seek)
+    this.playlistService.updateProgressTime(this.currentSong._id, seek)
     if(this.player.playing()){
       setTimeout(()=>{
         this.updateProgress();
