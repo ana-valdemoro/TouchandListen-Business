@@ -19,12 +19,16 @@ export class PlaylistService {
   }
 
   deleteCurrentSong(id:string){
-    this.afs.collection('Playlist').doc(id).delete()
-      .then(()=> console.log("Hemos eliminado la cancion"));
+    return this.afs.collection('Playlist').doc(id).delete();
   }
   getNextCurrentSongObservable (){
     return this.afs.collection('Playlist', ref => ref.where("isPlaying", "==", false).orderBy('likesCount', 'desc').orderBy('createdAt').limit(1)).valueChanges();
   } 
+
+  getCurrentSongObservable(){
+    return this.afs.collection('Playlist', ref => ref.where("isPlaying", "==", true).limit(1)).valueChanges();
+
+  }
 
   updateProgressTime(id:string, time: string){
     this.afs.collection('Playlist').doc(id).update( {currentTime: time} )
